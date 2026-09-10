@@ -1,6 +1,6 @@
-# [level 1] 경기도에 위치한 식품창고 목록 출력하기 - 131114 
+# [level 1] 이름이 없는 동물의 아이디 - 59039 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/131114) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/59039) 
 
 ### 성능 요약
 
@@ -16,130 +16,107 @@
 
 ### 제출 일자
 
-2026년 09월 10일 17:59:00
+2026년 09월 10일 18:02:18
 
 ### 문제 설명
 
-<p>다음은 식품창고의 정보를 담은 <code>FOOD_WAREHOUSE</code> 테이블입니다. <code>FOOD_WAREHOUSE</code> 테이블은 다음과 같으며 <code>WAREHOUSE_ID</code>, <code>WAREHOUSE_NAME</code>, <code>ADDRESS</code>, <code>TLNO</code>, <code>FREEZER_YN</code>는 창고 ID, 창고 이름, 창고 주소, 전화번호, 냉동시설 여부를 의미합니다.</p>
+<p><code>ANIMAL_INS</code> 테이블은 동물 보호소에 들어온 동물의 정보를 담은 테이블입니다. <code>ANIMAL_INS</code> 테이블 구조는 다음과 같으며, <code>ANIMAL_ID</code>, <code>ANIMAL_TYPE</code>, <code>DATETIME</code>, <code>INTAKE_CONDITION</code>, <code>NAME</code>, <code>SEX_UPON_INTAKE</code>는 각각 동물의 아이디, 생물 종, 보호 시작일, 보호 시작 시 상태, 이름, 성별 및 중성화 여부를 나타냅니다.</p>
 <table class="table">
         <thead><tr>
-<th>Column name</th>
-<th>Type</th>
-<th>Nullable</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>NULLABLE</th>
 </tr>
 </thead>
         <tbody><tr>
-<td>WAREHOUSE_ID</td>
-<td>VARCHAR(10)</td>
+<td>ANIMAL_ID</td>
+<td>VARCHAR(N)</td>
 <td>FALSE</td>
 </tr>
 <tr>
-<td>WAREHOUSE_NAME</td>
-<td>VARCHAR(20)</td>
+<td>ANIMAL_TYPE</td>
+<td>VARCHAR(N)</td>
 <td>FALSE</td>
 </tr>
 <tr>
-<td>ADDRESS</td>
-<td>VARCHAR(100)</td>
+<td>DATETIME</td>
+<td>DATETIME</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>INTAKE_CONDITION</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>NAME</td>
+<td>VARCHAR(N)</td>
 <td>TRUE</td>
 </tr>
 <tr>
-<td>TLNO</td>
-<td>VARCHAR(20)</td>
-<td>TRUE</td>
-</tr>
-<tr>
-<td>FREEZER_YN</td>
-<td>VARCHAR(1)</td>
-<td>TRUE</td>
+<td>SEX_UPON_INTAKE</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
 </tr>
 </tbody>
       </table>
-<hr>
-
-<h5>문제</h5>
-
-<p><code>FOOD_WAREHOUSE</code> 테이블에서 경기도에 위치한 창고의 ID, 이름, 주소, 냉동시설 여부를 조회하는 SQL문을 작성해주세요. 이때 냉동시설 여부가 NULL인 경우, 'N'으로 출력시켜 주시고 결과는 창고 ID를 기준으로 오름차순 정렬해주세요.</p>
-
-<hr>
+<p>동물 보호소에 들어온 동물 중, 이름이 없는 채로 들어온 동물의 ID를 조회하는 SQL 문을 작성해주세요. 단, ID는 오름차순 정렬되어야 합니다. </p>
 
 <h5>예시</h5>
 
-<p><code>FOOD_WAREHOUSE</code> 테이블이 다음과 같을 때</p>
+<p>예를 들어 <code>ANIMAL_INS</code> 테이블이 다음과 같다면</p>
 <table class="table">
         <thead><tr>
-<th>WAREHOUSE_ID</th>
-<th>WAREHOUSE_NAME</th>
-<th>ADDRESS</th>
-<th>TLNO</th>
-<th>FREEZER_YN</th>
+<th>ANIMAL_ID</th>
+<th>ANIMAL_TYPE</th>
+<th>DATETIME</th>
+<th>INTAKE_CONDITION</th>
+<th>NAME</th>
+<th>SEX_UPON_INTAKE</th>
 </tr>
 </thead>
         <tbody><tr>
-<td>WH0001</td>
-<td>창고_경기1</td>
-<td>경기도 안산시 상록구 용담로 141</td>
-<td>031-152-1332</td>
-<td>Y</td>
-</tr>
-<tr>
-<td>WH0002</td>
-<td>창고_충북1</td>
-<td>충청북도 진천군 진천읍 씨제이로 110</td>
-<td>043-623-9900</td>
-<td>Y</td>
-</tr>
-<tr>
-<td>WH0003</td>
-<td>창고_경기2</td>
-<td>경기도 이천시 마장면 덕평로 811</td>
-<td>031-221-7241</td>
+<td>A368930</td>
+<td>Dog</td>
+<td>2014-06-08 13:20:00</td>
+<td>Normal</td>
 <td>NULL</td>
+<td>Spayed Female</td>
 </tr>
 <tr>
-<td>WH0004</td>
-<td>창고_경기3</td>
-<td>경기도 김포시 대곶면 율생중앙로205번길</td>
-<td>031-671-1900</td>
-<td>N</td>
+<td>A524634</td>
+<td>Dog</td>
+<td>2015-01-02 18:54:00</td>
+<td>Normal</td>
+<td>*Belle</td>
+<td>Intact Female</td>
 </tr>
 <tr>
-<td>WH0005</td>
-<td>창고_충남1</td>
-<td>충청남도 천안시 동남구 광덕면 신덕리1길 9</td>
-<td>041-876-5421</td>
-<td>Y</td>
+<td>A465637</td>
+<td>Dog</td>
+<td>2017-06-04 08:17:00</td>
+<td>Injured</td>
+<td>*Commander</td>
+<td>Neutered Male</td>
 </tr>
 </tbody>
       </table>
-<p>SQL을 실행하면 다음과 같이 출력되어야 합니다.</p>
+<p>이름이 없는 채로 들어온 동물의 ID는 A368930입니다. 따라서 SQL을 실행하면 다음과 같이 출력되어야 합니다.</p>
 <table class="table">
         <thead><tr>
-<th>WAREHOUSE_ID</th>
-<th>WAREHOUSE_NAME</th>
-<th>ADDRESS</th>
-<th>FREEZER_YN</th>
+<th>ANIMAL_ID</th>
 </tr>
 </thead>
         <tbody><tr>
-<td>WH0001</td>
-<td>창고_경기1</td>
-<td>경기도 안산시 상록구 용담로 141</td>
-<td>Y</td>
-</tr>
-<tr>
-<td>WH0003</td>
-<td>창고_경기2</td>
-<td>경기도 이천시 마장면 덕평로 811</td>
-<td>N</td>
-</tr>
-<tr>
-<td>WH0004</td>
-<td>창고_경기3</td>
-<td>경기도 김포시 대곶면 율생중앙로205번길</td>
-<td>N</td>
+<td>A368930</td>
 </tr>
 </tbody>
       </table>
+<hr>
+
+<p>본 문제는 <a href="https://www.kaggle.com/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes" target="_blank" rel="noopener">Kaggle의 "Austin Animal Center Shelter Intakes and Outcomes"</a>에서 제공하는 데이터를 사용하였으며 <a href="https://opendatacommons.org/licenses/odbl/1.0/" target="_blank" rel="noopener">ODbL</a>의 적용을 받습니다.</p>
+
+<p>※ 2019년 9월 4일 13시: 예시가 헷갈린다는 의견이 많아, 본문의 예시를 수정하였습니다.</p>
+
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
