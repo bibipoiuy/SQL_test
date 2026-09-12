@@ -1,6 +1,6 @@
-# [level 1] 흉부외과 또는 일반외과 의사 목록 출력하기 - 132203 
+# [level 2] 3월에 태어난 여성 회원 목록 출력하기 - 131120 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/132203) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/131120) 
 
 ### 성능 요약
 
@@ -16,11 +16,11 @@
 
 ### 제출 일자
 
-2026년 09월 12일 16:26:42
+2026년 09월 12일 16:41:03
 
 ### 문제 설명
 
-<p>다음은 종합병원에 속한 의사 정보를 담은<code>DOCTOR</code> 테이블입니다. <code>DOCTOR</code> 테이블은 다음과 같으며 <code>DR_NAME</code>, <code>DR_ID</code>, <code>LCNS_NO</code>, <code>HIRE_YMD</code>, <code>MCDP_CD</code>, <code>TLNO</code>는 각각 의사이름, 의사ID, 면허번호, 고용일자, 진료과코드, 전화번호를 나타냅니다.</p>
+<p>다음은 식당 리뷰 사이트의 회원 정보를 담은 <code>MEMBER_PROFILE</code> 테이블입니다. <code>MEMBER_PROFILE</code> 테이블은 다음과 같으며 <code>MEMBER_ID</code>, <code>MEMBER_NAME</code>, <code>TLNO</code>, <code>GENDER</code>, <code>DATE_OF_BIRTH</code>는 회원 ID, 회원 이름, 회원 연락처, 성별, 생년월일을 의미합니다.</p>
 <table class="table">
         <thead><tr>
 <th>Column name</th>
@@ -29,33 +29,28 @@
 </tr>
 </thead>
         <tbody><tr>
-<td>DR_NAME</td>
-<td>VARCHAR(20)</td>
+<td>MEMBER_ID</td>
+<td>VARCHAR(100)</td>
 <td>FALSE</td>
 </tr>
 <tr>
-<td>DR_ID</td>
-<td>VARCHAR(10)</td>
+<td>MEMBER_NAME</td>
+<td>VARCHAR(50)</td>
 <td>FALSE</td>
-</tr>
-<tr>
-<td>LCNS_NO</td>
-<td>VARCHAR(30)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>HIRE_YMD</td>
-<td>DATE</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>MCDP_CD</td>
-<td>VARCHAR(6)</td>
-<td>TRUE</td>
 </tr>
 <tr>
 <td>TLNO</td>
 <td>VARCHAR(50)</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>GENDER</td>
+<td>VARCHAR(1)</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>DATE_OF_BIRTH</td>
+<td>DATE</td>
 <td>TRUE</td>
 </tr>
 </tbody>
@@ -64,149 +59,73 @@
 
 <h5>문제</h5>
 
-<p><code>DOCTOR</code> 테이블에서 진료과가 흉부외과(CS)이거나 일반외과(GS)인 의사의 이름, 의사ID, 진료과, 고용일자를 조회하는 SQL문을 작성해주세요. 이때 결과는 고용일자를 기준으로 내림차순 정렬하고, 고용일자가 같다면 이름을 기준으로 오름차순 정렬해주세요.</p>
+<p><code>MEMBER_PROFILE</code> 테이블에서 생일이 3월인 여성 회원의 ID, 이름, 성별, 생년월일을 조회하는 SQL문을 작성해주세요. 이때 전화번호가 NULL인 경우는 출력대상에서 제외시켜 주시고, 결과는 회원ID를 기준으로 오름차순 정렬해주세요. </p>
 
 <hr>
 
 <h5>예시</h5>
 
-<p><code>DOCTOR</code> 테이블이 다음과 같을 때</p>
+<p><code>MEMBER_PROFILE</code> 테이블이 다음과 같을 때</p>
 <table class="table">
         <thead><tr>
-<th>DR_NAME</th>
-<th>DR_ID</th>
-<th>LCNS_NO</th>
-<th>HIRE_YMD</th>
-<th>MCDP_CD</th>
+<th>MEMBER_ID</th>
+<th>MEMBER_NAME</th>
 <th>TLNO</th>
+<th>GENDER</th>
+<th>DATE_OF_BIRTH</th>
 </tr>
 </thead>
         <tbody><tr>
-<td>루피</td>
-<td>DR20090029</td>
-<td>LC00010001</td>
-<td>2009-03-01</td>
-<td>CS</td>
-<td>01085482011</td>
+<td><code>jiho92@naver.com</code></td>
+<td>이지호</td>
+<td>01076432111</td>
+<td>W</td>
+<td>1992-02-12</td>
 </tr>
 <tr>
-<td>패티</td>
-<td>DR20090001</td>
-<td>LC00010901</td>
-<td>2009-07-01</td>
-<td>CS</td>
-<td>01085220122</td>
+<td><code>jiyoon22@hotmail.com</code></td>
+<td>김지윤</td>
+<td>01032324117</td>
+<td>W</td>
+<td>1992-02-22</td>
 </tr>
 <tr>
-<td>뽀로로</td>
-<td>DR20170123</td>
-<td>LC00091201</td>
-<td>2017-03-01</td>
-<td>GS</td>
-<td>01034969210</td>
+<td><code>jihoon93@hanmail.net</code></td>
+<td>김지훈</td>
+<td>01023258688</td>
+<td>M</td>
+<td>1993-02-23</td>
 </tr>
 <tr>
-<td>티거</td>
-<td>DR20100011</td>
-<td>LC00011201</td>
-<td>2010-03-01</td>
-<td>NP</td>
-<td>01034229818</td>
+<td><code>seoyeons@naver.com</code></td>
+<td>박서연</td>
+<td>01076482209</td>
+<td>W</td>
+<td>1993-03-16</td>
 </tr>
 <tr>
-<td>품바</td>
-<td>DR20090231</td>
-<td>LC00011302</td>
-<td>2015-11-01</td>
-<td>OS</td>
-<td>01049840278</td>
-</tr>
-<tr>
-<td>티몬</td>
-<td>DR20090112</td>
-<td>LC00011162</td>
-<td>2010-03-01</td>
-<td>FM</td>
-<td>01094622190</td>
-</tr>
-<tr>
-<td>니모</td>
-<td>DR20200012</td>
-<td>LC00911162</td>
-<td>2020-03-01</td>
-<td>CS</td>
-<td>01089483921</td>
-</tr>
-<tr>
-<td>오로라</td>
-<td>DR20100031</td>
-<td>LC00010327</td>
-<td>2010-11-01</td>
-<td>OS</td>
-<td>01098428957</td>
-</tr>
-<tr>
-<td>자스민</td>
-<td>DR20100032</td>
-<td>LC00010192</td>
-<td>2010-03-01</td>
-<td>GS</td>
-<td>01023981922</td>
-</tr>
-<tr>
-<td>벨</td>
-<td>DR20100039</td>
-<td>LC00010562</td>
-<td>2010-07-01</td>
-<td>GS</td>
-<td>01058390758</td>
+<td><code>yoonsy94@gmail.com</code></td>
+<td>윤서연</td>
+<td>NULL</td>
+<td>W</td>
+<td>1994-03-19</td>
 </tr>
 </tbody>
       </table>
 <p>SQL을 실행하면 다음과 같이 출력되어야 합니다.</p>
 <table class="table">
         <thead><tr>
-<th>DR_NAME</th>
-<th>DR_ID</th>
-<th>MCDP_CD</th>
-<th>HIRE_YMD</th>
+<th>MEMBER_ID</th>
+<th>MEMBER_NAME</th>
+<th>GENDER</th>
+<th>DATE_OF_BIRTH</th>
 </tr>
 </thead>
         <tbody><tr>
-<td>니모</td>
-<td>DR20200012</td>
-<td>CS</td>
-<td>2020-03-01</td>
-</tr>
-<tr>
-<td>뽀로로</td>
-<td>DR20170123</td>
-<td>GS</td>
-<td>2017-03-01</td>
-</tr>
-<tr>
-<td>벨</td>
-<td>DR20100039</td>
-<td>GS</td>
-<td>2010-07-01</td>
-</tr>
-<tr>
-<td>자스민</td>
-<td>DR20100032</td>
-<td>GS</td>
-<td>2010-03-01</td>
-</tr>
-<tr>
-<td>패티</td>
-<td>DR20090001</td>
-<td>CS</td>
-<td>2009-07-01</td>
-</tr>
-<tr>
-<td>루피</td>
-<td>DR20090029</td>
-<td>CS</td>
-<td>2009-03-01</td>
+<td><code>seoyeons@naver.com</code></td>
+<td>박서연</td>
+<td>W</td>
+<td>1993-03-16</td>
 </tr>
 </tbody>
       </table>
@@ -214,7 +133,7 @@
 
 <h5>주의사항</h5>
 
-<p>날짜 포맷은 예시와 동일하게 나와야합니다.</p>
+<p><code>DATE_OF_BIRTH</code>의 데이트 포맷이 예시와 동일해야 정답처리 됩니다.</p>
 
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
