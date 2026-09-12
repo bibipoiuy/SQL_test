@@ -1,6 +1,6 @@
-# [level 1] 이름이 없는 동물의 아이디 - 59039 
+# [level 1] 흉부외과 또는 일반외과 의사 목록 출력하기 - 132203 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/59039) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/132203) 
 
 ### 성능 요약
 
@@ -8,7 +8,7 @@
 
 ### 구분
 
-코딩테스트 연습 > IS NULL
+코딩테스트 연습 > SELECT
 
 ### 채점결과
 
@@ -16,107 +16,205 @@
 
 ### 제출 일자
 
-2026년 09월 10일 18:02:18
+2026년 09월 12일 16:26:42
 
 ### 문제 설명
 
-<p><code>ANIMAL_INS</code> 테이블은 동물 보호소에 들어온 동물의 정보를 담은 테이블입니다. <code>ANIMAL_INS</code> 테이블 구조는 다음과 같으며, <code>ANIMAL_ID</code>, <code>ANIMAL_TYPE</code>, <code>DATETIME</code>, <code>INTAKE_CONDITION</code>, <code>NAME</code>, <code>SEX_UPON_INTAKE</code>는 각각 동물의 아이디, 생물 종, 보호 시작일, 보호 시작 시 상태, 이름, 성별 및 중성화 여부를 나타냅니다.</p>
+<p>다음은 종합병원에 속한 의사 정보를 담은<code>DOCTOR</code> 테이블입니다. <code>DOCTOR</code> 테이블은 다음과 같으며 <code>DR_NAME</code>, <code>DR_ID</code>, <code>LCNS_NO</code>, <code>HIRE_YMD</code>, <code>MCDP_CD</code>, <code>TLNO</code>는 각각 의사이름, 의사ID, 면허번호, 고용일자, 진료과코드, 전화번호를 나타냅니다.</p>
 <table class="table">
         <thead><tr>
-<th>NAME</th>
-<th>TYPE</th>
-<th>NULLABLE</th>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
 </tr>
 </thead>
         <tbody><tr>
-<td>ANIMAL_ID</td>
-<td>VARCHAR(N)</td>
+<td>DR_NAME</td>
+<td>VARCHAR(20)</td>
 <td>FALSE</td>
 </tr>
 <tr>
-<td>ANIMAL_TYPE</td>
-<td>VARCHAR(N)</td>
+<td>DR_ID</td>
+<td>VARCHAR(10)</td>
 <td>FALSE</td>
 </tr>
 <tr>
-<td>DATETIME</td>
-<td>DATETIME</td>
+<td>LCNS_NO</td>
+<td>VARCHAR(30)</td>
 <td>FALSE</td>
 </tr>
 <tr>
-<td>INTAKE_CONDITION</td>
-<td>VARCHAR(N)</td>
+<td>HIRE_YMD</td>
+<td>DATE</td>
 <td>FALSE</td>
 </tr>
 <tr>
-<td>NAME</td>
-<td>VARCHAR(N)</td>
+<td>MCDP_CD</td>
+<td>VARCHAR(6)</td>
 <td>TRUE</td>
 </tr>
 <tr>
-<td>SEX_UPON_INTAKE</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
-</tr>
-</tbody>
-      </table>
-<p>동물 보호소에 들어온 동물 중, 이름이 없는 채로 들어온 동물의 ID를 조회하는 SQL 문을 작성해주세요. 단, ID는 오름차순 정렬되어야 합니다. </p>
-
-<h5>예시</h5>
-
-<p>예를 들어 <code>ANIMAL_INS</code> 테이블이 다음과 같다면</p>
-<table class="table">
-        <thead><tr>
-<th>ANIMAL_ID</th>
-<th>ANIMAL_TYPE</th>
-<th>DATETIME</th>
-<th>INTAKE_CONDITION</th>
-<th>NAME</th>
-<th>SEX_UPON_INTAKE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>A368930</td>
-<td>Dog</td>
-<td>2014-06-08 13:20:00</td>
-<td>Normal</td>
-<td>NULL</td>
-<td>Spayed Female</td>
-</tr>
-<tr>
-<td>A524634</td>
-<td>Dog</td>
-<td>2015-01-02 18:54:00</td>
-<td>Normal</td>
-<td>*Belle</td>
-<td>Intact Female</td>
-</tr>
-<tr>
-<td>A465637</td>
-<td>Dog</td>
-<td>2017-06-04 08:17:00</td>
-<td>Injured</td>
-<td>*Commander</td>
-<td>Neutered Male</td>
-</tr>
-</tbody>
-      </table>
-<p>이름이 없는 채로 들어온 동물의 ID는 A368930입니다. 따라서 SQL을 실행하면 다음과 같이 출력되어야 합니다.</p>
-<table class="table">
-        <thead><tr>
-<th>ANIMAL_ID</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>A368930</td>
+<td>TLNO</td>
+<td>VARCHAR(50)</td>
+<td>TRUE</td>
 </tr>
 </tbody>
       </table>
 <hr>
 
-<p>본 문제는 <a href="https://www.kaggle.com/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes" target="_blank" rel="noopener">Kaggle의 "Austin Animal Center Shelter Intakes and Outcomes"</a>에서 제공하는 데이터를 사용하였으며 <a href="https://opendatacommons.org/licenses/odbl/1.0/" target="_blank" rel="noopener">ODbL</a>의 적용을 받습니다.</p>
+<h5>문제</h5>
 
-<p>※ 2019년 9월 4일 13시: 예시가 헷갈린다는 의견이 많아, 본문의 예시를 수정하였습니다.</p>
+<p><code>DOCTOR</code> 테이블에서 진료과가 흉부외과(CS)이거나 일반외과(GS)인 의사의 이름, 의사ID, 진료과, 고용일자를 조회하는 SQL문을 작성해주세요. 이때 결과는 고용일자를 기준으로 내림차순 정렬하고, 고용일자가 같다면 이름을 기준으로 오름차순 정렬해주세요.</p>
+
+<hr>
+
+<h5>예시</h5>
+
+<p><code>DOCTOR</code> 테이블이 다음과 같을 때</p>
+<table class="table">
+        <thead><tr>
+<th>DR_NAME</th>
+<th>DR_ID</th>
+<th>LCNS_NO</th>
+<th>HIRE_YMD</th>
+<th>MCDP_CD</th>
+<th>TLNO</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>루피</td>
+<td>DR20090029</td>
+<td>LC00010001</td>
+<td>2009-03-01</td>
+<td>CS</td>
+<td>01085482011</td>
+</tr>
+<tr>
+<td>패티</td>
+<td>DR20090001</td>
+<td>LC00010901</td>
+<td>2009-07-01</td>
+<td>CS</td>
+<td>01085220122</td>
+</tr>
+<tr>
+<td>뽀로로</td>
+<td>DR20170123</td>
+<td>LC00091201</td>
+<td>2017-03-01</td>
+<td>GS</td>
+<td>01034969210</td>
+</tr>
+<tr>
+<td>티거</td>
+<td>DR20100011</td>
+<td>LC00011201</td>
+<td>2010-03-01</td>
+<td>NP</td>
+<td>01034229818</td>
+</tr>
+<tr>
+<td>품바</td>
+<td>DR20090231</td>
+<td>LC00011302</td>
+<td>2015-11-01</td>
+<td>OS</td>
+<td>01049840278</td>
+</tr>
+<tr>
+<td>티몬</td>
+<td>DR20090112</td>
+<td>LC00011162</td>
+<td>2010-03-01</td>
+<td>FM</td>
+<td>01094622190</td>
+</tr>
+<tr>
+<td>니모</td>
+<td>DR20200012</td>
+<td>LC00911162</td>
+<td>2020-03-01</td>
+<td>CS</td>
+<td>01089483921</td>
+</tr>
+<tr>
+<td>오로라</td>
+<td>DR20100031</td>
+<td>LC00010327</td>
+<td>2010-11-01</td>
+<td>OS</td>
+<td>01098428957</td>
+</tr>
+<tr>
+<td>자스민</td>
+<td>DR20100032</td>
+<td>LC00010192</td>
+<td>2010-03-01</td>
+<td>GS</td>
+<td>01023981922</td>
+</tr>
+<tr>
+<td>벨</td>
+<td>DR20100039</td>
+<td>LC00010562</td>
+<td>2010-07-01</td>
+<td>GS</td>
+<td>01058390758</td>
+</tr>
+</tbody>
+      </table>
+<p>SQL을 실행하면 다음과 같이 출력되어야 합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>DR_NAME</th>
+<th>DR_ID</th>
+<th>MCDP_CD</th>
+<th>HIRE_YMD</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>니모</td>
+<td>DR20200012</td>
+<td>CS</td>
+<td>2020-03-01</td>
+</tr>
+<tr>
+<td>뽀로로</td>
+<td>DR20170123</td>
+<td>GS</td>
+<td>2017-03-01</td>
+</tr>
+<tr>
+<td>벨</td>
+<td>DR20100039</td>
+<td>GS</td>
+<td>2010-07-01</td>
+</tr>
+<tr>
+<td>자스민</td>
+<td>DR20100032</td>
+<td>GS</td>
+<td>2010-03-01</td>
+</tr>
+<tr>
+<td>패티</td>
+<td>DR20090001</td>
+<td>CS</td>
+<td>2009-07-01</td>
+</tr>
+<tr>
+<td>루피</td>
+<td>DR20090029</td>
+<td>CS</td>
+<td>2009-03-01</td>
+</tr>
+</tbody>
+      </table>
+<hr>
+
+<h5>주의사항</h5>
+
+<p>날짜 포맷은 예시와 동일하게 나와야합니다.</p>
 
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
